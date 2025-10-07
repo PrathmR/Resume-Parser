@@ -1,0 +1,8 @@
+Flask
+werkzeug
+pandas
+pyresparser[spacy]
+pdfminer.six
+pafy
+plotly
+youtube-dl
