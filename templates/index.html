@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Resume Analyzer</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; color: #333; text-align: center; margin-top: 50px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #5a5a5a; }
+        input[type="file"] { border: 1px solid #ddd; padding: 10px; border-radius: 4px; }
+        input[type="submit"] { background-color: #5c67f2; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px;}
+        input[type="submit"]:hover { background-color: #4a54c4; }
+        .admin-link { display: block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='SRA_Logo.jpg') }}" alt="Logo" width="150">
+        <h1>Smart Resume Analyzer</h1>
+        <p>Upload your resume (PDF) to get an in-depth analysis and recommendations.</p>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="resume" accept=".pdf" required>
+            <br>
+            <input type="submit" value="Analyze Resume">
+        </form>
+       
+    </div>
+</body>
+</html>

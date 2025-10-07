@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: sans-serif; }
+        .container { max-width: 1200px; margin: auto; }
+        table.data { border-collapse: collapse; width: 100%; }
+        table.data th, table.data td { border: 1px solid #ddd; padding: 8px; }
+        table.data tr:nth-child(even){background-color: #f2f2f2;}
+        table.data th { padding-top: 12px; padding-bottom: 12px; text-align: left; background-color: #5c67f2; color: white; }
+        .charts { display: flex; justify-content: space-around; margin-top: 30px; }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        .download-btn { background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <div>
+                <a href="{{ url_for('download_report') }}" class="download-btn">Download Report (CSV)</a>
+                <a href="{{ url_for('logout') }}" style="margin-left: 15px;">Logout</a>
+            </div>
+        </div>
+        
+        <h2>User Data</h2>
+        {{ table|safe }}
+        
+        <div class="charts">
+            <div class="chart-container">
+                <h2>Predicted Field Distribution</h2>
+                {{ chart1|safe }}
+            </div>
+            <div class="chart-container">
+                <h2>User Experience Level</h2>
+                {{ chart2|safe }}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Results</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; color: #333; margin: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: #5a5a5a; border-bottom: 2px solid #5c67f2; padding-bottom: 5px;}
+        .section { margin-bottom: 25px; }
+        .tag { display: inline-block; background-color: #e0e0e0; color: #333; padding: 5px 10px; border-radius: 15px; margin: 3px; font-size: 14px; }
+        .success { color: #28a745; }
+        .warning { color: #ffc107; }
+        .score-bar { width: 100%; background-color: #e0e0e0; border-radius: 5px; }
+        .score-progress { width: {{ resume_score }}%; background-color: #5c67f2; height: 24px; text-align: center; line-height: 24px; color: white; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Analysis for {{ name }}</h1>
+
+        <div class="section">
+            <h2>Your Basic Info</h2>
+            <p><strong>Email:</strong> {{ email }}</p>
+            <p><strong>Contact:</strong> {{ mobile }}</p>
+            <p><strong>Resume Pages:</strong> {{ pages }}</p>
+            <p><strong>Experience Level:</strong> {{ cand_level }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Skills Analysis</h2>
+            <p class="success">Our analysis suggests you are a good fit for <strong>{{ reco_field }}</strong> roles.</p>
+            <h3>Your Skills:</h3>
+            <div>
+                {% for skill in skills %}
+                    <span class="tag">{{ skill }}</span>
+                {% endfor %}
+            </div>
+            <br>
+            <h3>Recommended Skills to Add:</h3>
+            <div>
+                {% for r_skill in recommended_skills %}
+                    <span class="tag" style="background-color: #d1e7dd;">{{ r_skill }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Course Recommendations 🎓</h2>
+            <ul>
+                {% for c_name, c_link in rec_course %}
+                    <li><a href="{{ c_link }}" target="_blank">{{ c_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Resume Score & Tips 📝</h2>
+            <div class="score-bar">
+                <div class="score-progress">{{ resume_score }}%</div>
+            </div>
+            <p class="warning">Note: This score is calculated based on the presence of key sections.</p>
+            <ul>
+                {% for section, (found, message) in tips.items() %}
+                    <li class="{{ 'success' if found else 'warning' }}"><strong>{{ section }}:</strong> {{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Bonus Videos 💡</h2>
+            <h3>Resume Writing Tips</h3>
+            <h4>{{ res_vid_title }}</h4>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ resume_vid.split('=')[-1] }}" frameborder="0" allowfullscreen></iframe>
+            
+            <h3>Interview Preparation</h3>
+            <h4>{{ int_vid_title }}</h4>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ interview_vid.split('=')[-1] }}" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <a href="/">Analyze another resume</a>
+    </div>
+</body>
+</html>
