@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>📄 Resume Analyzer</h2>
+        
+        <!-- Upload Form -->
+        <form method="post" enctype="multipart/form-data">
+            <label for="fileInput" class="custom-file-upload">Choose Resume</label>
+            <input id="fileInput" type="file" name="file" required>
+            <input type="submit" value="Upload & Analyze">
+        </form>
+
+        <!-- AI Result Section -->
+        {% if result %}
+            <div class="result-card">
+                <h3>✅ AI Analysis Result</h3>
+                <pre id="ai-result">{{ result }}</pre>
+                <button onclick="copyResult()" class="copy-btn">📋 Copy Result</button>
+            </div>
+        {% else %}
+            <p class="info-text">No result yet. Please upload a resume to begin analysis.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Copy to clipboard functionality
+        function copyResult() {
+            const resultText = document.getElementById('ai-result').innerText;
+            navigator.clipboard.writeText(resultText).then(() => {
+                alert("AI result copied to clipboard!");
+            });
+        }
+    </script>
+</body>
+</html>
